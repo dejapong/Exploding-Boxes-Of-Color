@@ -1,0 +1,105 @@
+<html>
+	<head>
+		<title>Exploding Boxes Of Color</title>
+<link href='http://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
+		<script type="text/javascript" src="raphael.min.js"></script>
+		<script type="text/javascript" src="eboc.min.js"></script>
+		<style type="text/css">
+			body{
+				font-family:"Lobster";
+				background:#252522;
+			}
+			th{
+				border-bottom:1px dashed #444;
+				font-family:"Lobster";
+				color:#444;
+				font-weight:normal;
+			}
+			td{
+				font-family:"Lobster";
+				color:#fff;
+				font-size:15pt;
+				padding:10px;
+			}
+			h1{
+				color:#444;
+				font-size:40pt;
+				margin-bottom:-20px;
+				text-align:center;
+			}
+			h3{
+				text-align:right;
+				font-weight:normal;
+				margin-right:30px;
+			
+			}
+			h3 a{
+				text-decoration:none;
+				color:#444;
+			}
+			#container{ 
+				width:800px;
+				margin:0px auto;
+			},
+			#holder{
+				float:left;
+				width:500px;
+			}
+			#stats{
+				float:left;
+				margin-top:50px;
+				width:300px;
+			}
+			.bodyText{ 
+				color:#444;
+				font-family:sans-serif;
+				text-align:justify;
+				font-size:8pt;
+			}
+			.dark{
+				color:#444;
+			} 
+		</style>
+	</head>
+	<body>
+		<h1>Exploding Blocks of Color</h1>
+		<div id="container">
+			<div id="stats">
+				<table>
+					<tr><td>Level </td><td colspan=2 width="100"><span id="level">1</span></td>
+					<tr><td>Score </td><td colspan=2  width="100"><span id="score">0</span></td>
+					<tr><td>Moves </td><td colspan=2 ><span id="moves">0</span></td>
+					<tr><td>Largest Group </td><td colspan=2 ><span id="group">0</span></td>
+				</table>
+			</div>
+			<div id="holder"></div>
+			<h3><a href="http://dejapong.com">Brought to you by Dejapong</a></h3>
+			
+		<span class="bodyText">
+			<p>
+			Click groups of colors to explode them. Try to form large groups for 
+			score multipliers. Avoid leaving any stragglers and try to use as few clicks as possible.
+			The first couple of levels are pretty easy, then the blocks get smaller and more colors are added.
+			There are 10 levels and 1 bonus level. Most people can't get past level 6. <br>
+			Good Luck!
+			</span>
+		</div>
+		<script type="text/javascript">
+			var levelDisplay = document.getElementById("level");
+			var scoreDisplay = document.getElementById("score"); 
+			var movesDisplay = document.getElementById("moves"); 
+			var groupDisplay = document.getElementById("group"); 
+			Raphael.fn.matchDrop(
+				holder,500,500,
+					function(score,moves,largestGroup){
+						movesDisplay.innerHTML = moves;
+						groupDisplay.innerHTML = largestGroup;
+						scoreDisplay.innerHTML = score;
+					},
+					function(level){
+						levelDisplay.innerHTML = level;
+					}
+				);
+		</script>
+	</body>
+</html>
