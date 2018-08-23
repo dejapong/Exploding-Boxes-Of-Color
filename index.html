@@ -1,11 +1,14 @@
+<!doctype html>
 <html>
 	<head>
 		<title>Exploding Boxes Of Color</title>
-<link href='http://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
-		<script type="text/javascript" src="raphael.min.js"></script>
-		<script type="text/javascript" src="eboc.min.js"></script>
+		<link href='http://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
+		<script type="text/javascript" src="raphael.2.2.1.min.js"></script>
+		<script type="text/javascript" src="eboc.js"></script>
+		<script type="text/javascript" src="eboc.view.svg.js"></script>
 		<style type="text/css">
 			body{
+				touch-action: manipulation;
 				font-family:"Lobster";
 				background:#252522;
 			}
@@ -31,15 +34,22 @@
 				text-align:right;
 				font-weight:normal;
 				margin-right:30px;
-			
+
 			}
 			h3 a{
 				text-decoration:none;
 				color:#444;
 			}
-			#container{ 
+			#container{
+				touch-action: manipulation;
 				width:800px;
 				margin:0px auto;
+		    -webkit-touch-callout: none;
+		    -webkit-user-select: none;
+		    -khtml-user-select: none;
+		    -moz-user-select: none;
+		    -ms-user-select: none;
+		    user-select: none;
 			},
 			#holder{
 				float:left;
@@ -50,7 +60,7 @@
 				margin-top:50px;
 				width:300px;
 			}
-			.bodyText{ 
+			.bodyText{
 				color:#444;
 				font-family:sans-serif;
 				text-align:justify;
@@ -58,11 +68,14 @@
 			}
 			.dark{
 				color:#444;
-			} 
+			}
+			svg {
+				overflow: unset;
+			}
 		</style>
 	</head>
 	<body>
-		<h1>Exploding Blocks of Color</h1>
+		<h1>Exploding Boxes of Color</h1>
 		<div id="container">
 			<div id="stats">
 				<table>
@@ -73,11 +86,14 @@
 				</table>
 			</div>
 			<div id="holder"></div>
-			<h3><a href="http://dejapong.com">Brought to you by Dejapong</a></h3>
-			
+			<h3>
+				<a href="http://dejapong.com">By Dejapong</a>
+				| <a href="http://github.com/dejapong/Exploding-Boxes-Of-Color">View on Github</a>
+			</h3>
+
 		<span class="bodyText">
 			<p>
-			Click groups of colors to explode them. Try to form large groups for 
+			Click groups of colors to explode them. Try to form large groups for
 			score multipliers. Avoid leaving any stragglers and try to use as few clicks as possible.
 			The first couple of levels are pretty easy, then the blocks get smaller and more colors are added.
 			There are 10 levels and 1 bonus level. Most people can't get past level 6. <br>
@@ -86,11 +102,11 @@
 		</div>
 		<script type="text/javascript">
 			var levelDisplay = document.getElementById("level");
-			var scoreDisplay = document.getElementById("score"); 
-			var movesDisplay = document.getElementById("moves"); 
-			var groupDisplay = document.getElementById("group"); 
-			Raphael.fn.matchDrop(
-				holder,500,500,
+			var scoreDisplay = document.getElementById("score");
+			var movesDisplay = document.getElementById("moves");
+			var groupDisplay = document.getElementById("group");
+			window.eboc = new Eboc(
+				"holder",500,500,
 					function(score,moves,largestGroup){
 						movesDisplay.innerHTML = moves;
 						groupDisplay.innerHTML = largestGroup;
