@@ -1,6 +1,6 @@
 # Exploding Boxes of Color (Eboc)
 
-[[https://github.com/dejapong/Exploding-Boxes-Of-Color/screenshot.png|alt= Eboc Screenshot]]
+<img align="right" width="450" src="https://github.com/dejapong/Exploding-Boxes-Of-Color/blob/master/screenshot.png">
 
 Eboc started as a quick weekend project back in 2012. I was considering using Raphael.js for a project, and figured building a game would be a good way to test the framework. I've refactored it since then.
 
@@ -8,8 +8,8 @@ The game is a color matching, falling block game that I broke up into a model an
 
 Promises compose nicely, and work naturally whether the view chooses to kick off multiple aync animations serially, or in parallel.
 
-# Serial Promises
-For an example of serial asynchronous animations: the end-of-level screen displays several lines of text, one after the other, then animates a counting score. The game model does not set up the next level until after the score has finished counting, or the user interrupts by clicking a "continue" button.
+# How Eboc Uses Serial Promises
+Eboc uses serial promises in a few places. For example, the end-of-level screen displays several lines of text, one after the other, then animates a counting score. The game model does not set up the next level until after the score has finished counting, or the user interrupts by clicking a "continue" button.
 
 A helper method called `_createLineExecutors()` in `Eboc.SvgView` accepts lines of screen text as an array of strings. It returns an array of "executors", functions which can be passed to the `Promise` constructors that perform an asynchronous action, then either call `resolve()`, `reject()` or return another promise. A simplified version of the Eboc function looks like this:
 
@@ -47,9 +47,9 @@ When `showEndLevel()` is called, it returns a promise. The model can then tell t
   }
 ```
 
-#Parallel Promises
+# How Eboc Uses Parallel Promises
 
-It's even easier to run promises in parallel using the `all()` method on an array of promises:
+Eboc runs parallel promises using the `all()` method on an array of promises. For example, when animating all blocks dropping:
 
 ```javascript
 Eboc.SvgView.prototype.showBoxesDropping = async function(boxesToDrop) {
