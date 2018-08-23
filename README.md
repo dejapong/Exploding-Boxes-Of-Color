@@ -1,5 +1,7 @@
 # Exploding Boxes of Color (Eboc)
 
+[[https://github.com/dejapong/Exploding-Boxes-Of-Color/screenshot.png|alt= Eboc Screenshot]]
+
 Eboc started as a quick weekend project back in 2012. I was considering using Raphael.js for a project, and figured building a game would be a good way to test the framework. I've refactored it since then.
 
 The game is a color matching, falling block game that I broke up into a model and view. The model contains the column structures and adjacency data. The view asynchronously animates game state transitions. Some animations are purely cosmetic, and do not interupt the game state. The ones that do used chained [promises](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) to ensure that game states do not transition until the animation is complete.

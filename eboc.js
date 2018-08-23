@@ -20,7 +20,7 @@ function Eboc(id, width, height, onScore, onLevelUp) {
   this.borderPadding = 30;
   this.currentLevelIndex = 0;
   this.levels = [
-    {size:15,numColors:1},
+    {size:15,numColors:3},
     {size:15,numColors:4},
     {size:20,numColors:3},
     {size:20,numColors:4},
